@@ -6,19 +6,18 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+
 	"github.com/korathbasil/chat-app-api/routes"
-);
+)
 
 func main() {
-	fmt.Println("App Stared");
+	fmt.Println("App Stared")
 
-	router := mux.NewRouter();
+	router := mux.NewRouter()
 
-	userRouter := router.PathPrefix("/user").Subrouter();
+	userRouter := router.PathPrefix("/user").Subrouter()
 
+	routes.InitializeUserRoute(userRouter)
 
-
-	routes.InitializeUserRoute(userRouter);
-
-	log.Fatal(http.ListenAndServe(":8000", router));
+	log.Fatal(http.ListenAndServe(":8000", router))
 }
