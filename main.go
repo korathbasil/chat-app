@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -13,7 +12,9 @@ func main() {
 
 	router := mux.NewRouter();
 
-	router.HandleFunc("/", homeHandler).Methods("GET");
+	userRouter := router.PathPrefix("/api/user").Subrouter();
+
+	userRouter.
 
 	log.Fatal(http.ListenAndServe(":8000", router));
 }
