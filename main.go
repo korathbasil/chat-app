@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/korathbasil/chat-app-api/routes"
 );
 
 func main() {
@@ -12,13 +14,11 @@ func main() {
 
 	router := mux.NewRouter();
 
-	userRouter := router.PathPrefix("/api/user").Subrouter();
+	userRouter := router.PathPrefix("/user").Subrouter();
 
-	userRouter.
+
+
+	routes.InitializeUserRoute(userRouter);
 
 	log.Fatal(http.ListenAndServe(":8000", router));
-}
-
-func homeHandler(writer http.ResponseWriter, request *http.Request) {
-	fmt.Fprintf(writer, "Hello World");
 }
