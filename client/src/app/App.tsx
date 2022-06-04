@@ -1,11 +1,11 @@
 import type { Component } from "solid-js";
 
-import { Header } from "../components";
+import { HomePage } from "../pages";
 
 const App: Component = () => {
   return (
     <div>
-      <Header />
+      <HomePage />
     </div>
   );
 };
