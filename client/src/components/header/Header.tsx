@@ -3,7 +3,7 @@ import type { Component } from "solid-js";
 export const Header: Component = () => {
   return (
     <header>
-      <p>Hell</p>
+      <h1>Ngage</h1>
     </header>
   );
 };
