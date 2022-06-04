@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "sass": "^1.52.2",
+    "solid-app-router": "^0.3.3",
     "solid-js": "^1.4.2"
   }
 }
