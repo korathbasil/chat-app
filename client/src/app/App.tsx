@@ -1,7 +1,13 @@
 import type { Component } from "solid-js";
 
+import { Header } from "../components";
+
 const App: Component = () => {
-  return <div>Chat App</div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 };
 
 export default App;
