@@ -1,5 +1,5 @@
 import type { Component } from "solid-js";
-import { Navigate, useNavigate } from "solid-app-router";
+import { useNavigate } from "solid-app-router";
 
 import styles from "./chat-header.module.scss";
 import { BackNav, NewAudioCall, NewVideoCall } from "../../assets/icons";
