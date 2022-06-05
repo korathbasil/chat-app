@@ -1,11 +1,14 @@
 import type { Component } from "solid-js";
 
-import { ChatHeader } from "../../components/chat-header/ChatHeader";
+import styles from "./chat.module.scss";
+import { ChatHeader, ChatBody } from "../../components";
 
 export const ChatPage: Component = () => {
   return (
-    <section>
+    <section class={styles.parent}>
       <ChatHeader />
+      <div class={styles.chatBody}></div>
+      <ChatBody />
     </section>
   );
 };

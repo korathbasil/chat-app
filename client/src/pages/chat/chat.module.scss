@@ -1,0 +1,8 @@
+.parent {
+    display: flex;
+    flex-direction: column;
+
+    .chatBody {
+        flex: 1;
+    }
+}
