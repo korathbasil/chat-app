@@ -5,3 +5,4 @@ export * from "./NewAudioCallIcon";
 export * from "./NewVideoCallIcon";
 export * from "./mic-icon";
 export * from "./send-icon";
+export * from "./google-icon";

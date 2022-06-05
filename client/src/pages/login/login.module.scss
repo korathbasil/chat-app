@@ -1,0 +1,15 @@
+.main {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+
+    a {
+        display: flex;
+        align-items: center;
+
+        h2 {
+            margin-left: 10px;
+        }
+    }
+}
