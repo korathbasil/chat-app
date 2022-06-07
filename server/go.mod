@@ -1,5 +1,5 @@
-module github.com/korathbasil/chat-app-api
+module github.com/korathbasil/chat-app/server
 
 go 1.16
 
-require github.com/gorilla/mux v1.8.0 // indirect
+require github.com/gofiber/fiber/v2 v2.34.0 // indirect

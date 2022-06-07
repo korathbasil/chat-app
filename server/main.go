@@ -1,23 +1,22 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"net/http"
 
-	"github.com/gorilla/mux"
-
-	"github.com/korathbasil/chat-app-api/routes"
+	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
-	fmt.Println("App Stared")
+	app := fiber.New()
 
-	router := mux.NewRouter()
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, World!")
+	})
 
-	userRouter := router.PathPrefix("/user").Subrouter()
+	apiGroup := app.Group("/api")
+	v1ApiGroup := apiGroup.Group("v1")
 
-	routes.InitializeUserRoute(userRouter)
+	usersGroup := v1ApiGroup.Group("/users")
 
-	log.Fatal(http.ListenAndServe(":8000", router))
+	log.Fatal(app.Listen(":3000"))
 }
