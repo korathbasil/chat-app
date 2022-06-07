@@ -1,5 +1,7 @@
 package users
 
-func GetAllUsers() []User {
-	return Users
+import "go.mongodb.org/mongo-driver/bson/primitive"
+
+func GetAllUsers() []primitive.M {
+	return FindAllUsers()
 }

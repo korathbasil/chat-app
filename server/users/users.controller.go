@@ -3,12 +3,24 @@ package users
 import "github.com/gofiber/fiber/v2"
 
 func InitializeRoutes(router fiber.Router) {
-	router.Get("/login", loginHandler)
+	router.Get("/", getUsersHandler)
+	// router.Post("/login", loginHandler)
 }
 
-func loginHandler(c *fiber.Ctx) error {
-	return c.SendString("LoginRoute")
+func getUsersHandler(c *fiber.Ctx) error {
+	users := GetAllUsers()
+
+	return c.JSON(users)
+
 }
+
+// func loginHandler(c *fiber.Ctx) error {
+// 	user := User{FullName: "assdfasa", ProfilePicture: "asasasas"}
+
+// 	UsersRepo{}.InsertOne(user)
+
+// 	return c.SendString("Inserted")
+// }
 
 // // Login user
 // func loginUser(w http.ResponseWriter, r *http.Request) {
