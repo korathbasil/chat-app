@@ -1,7 +1,13 @@
 package users
 
-func InitializeRoutes() {
+import "github.com/gofiber/fiber/v2"
 
+func InitializeRoutes(router fiber.Router) {
+	router.Get("/login", loginHandler)
+}
+
+func loginHandler(c *fiber.Ctx) error {
+	return c.SendString("LoginRoute")
 }
 
 // // Login user

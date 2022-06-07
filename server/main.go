@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/korathbasil/chat-app/server/users"
 )
 
 func main() {
@@ -16,7 +17,9 @@ func main() {
 	apiGroup := app.Group("/api")
 	v1ApiGroup := apiGroup.Group("v1")
 
-	usersGroup := v1ApiGroup.Group("/users")
+	usersRouter := v1ApiGroup.Group("/users")
 
-	log.Fatal(app.Listen(":3000"))
+	users.InitializeRoutes(usersRouter)
+
+	log.Fatal(app.Listen(":8000"))
 }
