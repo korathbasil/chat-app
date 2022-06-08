@@ -1,13 +1,79 @@
 package auth
 
 import (
+	"context"
+	"fmt"
+	"io/ioutil"
+	"net/http"
+
 	"github.com/gofiber/fiber/v2"
+	"github.com/korathbasil/chat-app/server/config"
 )
 
 func InitializeRoutes(router fiber.Router) {
-	router.Post("/google/login", googleLoginHandler)
+	router.Get("/google/login", googleOauthLoginHandler)
+	router.Post("/google/callback", googleOauthCallbackHandler)
 }
 
-func googleLoginHandler(c *fiber.Ctx) error {
-	return c.SendString("Google login")
+func googleOauthLoginHandler(c *fiber.Ctx) error {
+	googleConfig := config.SetupGoogleOauthConfig()
+	googleOauthUrl := googleConfig.AuthCodeURL("chat-app-auth-state")
+
+	return c.Redirect(googleOauthUrl)
+}
+
+func googleOauthCallbackHandler(c *fiber.Ctx) error {
+	type Body struct {
+		Code string `json:"code"`
+	}
+	var body Body
+
+	if err := c.BodyParser(&body); err != nil {
+		return err
+	}
+
+	code := body.Code
+
+	// state := c.Query("state")
+
+	// if state != "chat-app-auth-state" {
+	// 	fmt.Println(c.Query("state"))
+	// }
+
+	// code := c.Query("code")
+	// values, err := url.ParseQuery(string(c.Body()))
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// code := values["code"][0]
+	// fmt.Println(code)
+
+	if code != "" {
+		googleConfig := config.SetupGoogleOauthConfig()
+
+		token, err := googleConfig.Exchange(context.Background(), code)
+
+		if err != nil {
+			fmt.Println("Invalid code")
+		}
+
+		googleOauthApiUrl := "https://www.googleapis.com/oauth2/v2/userinfo?access_token="
+
+		resp, err := http.Get(googleOauthApiUrl + token.AccessToken)
+
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		data, err := ioutil.ReadAll(resp.Body)
+
+		if err != nil {
+			fmt.Println("failed to parse JSON")
+		}
+
+		return c.SendString(string(data))
+	} else {
+		return c.SendString("No code")
+	}
 }
