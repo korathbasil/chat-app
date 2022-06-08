@@ -1,6 +1,8 @@
 package auth
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/gofiber/fiber/v2"
+)
 
 func InitializeRoutes(router fiber.Router) {
 	router.Post("/google/login", googleLoginHandler)
