@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "react-google-login": "^5.2.2",
     "sass": "^1.52.2",
     "solid-app-router": "^0.3.3",
     "solid-js": "^1.4.2"
