@@ -1,4 +1,4 @@
-import styles from "./seach.module.scss";
+import styles from "./search.module.scss";
 import { SearchHeader } from "../../components";
 
 export const SearchPage = () => {

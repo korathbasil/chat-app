@@ -1,4 +1,4 @@
-import { children, Component, JSXElement } from "solid-js";
+import { Component } from "solid-js";
 import { Routes, Route, Navigate } from "solid-app-router";
 
 import { user } from "../data-store/user";

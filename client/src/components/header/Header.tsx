@@ -1,4 +1,5 @@
 import type { Component } from "solid-js";
+import { NavLink } from "solid-app-router";
 
 import { user } from "../../data-store/user";
 
@@ -10,7 +11,9 @@ export const Header: Component = () => {
     <header class={styles.header}>
       <h1>Ngage</h1>
       <div class={styles.right}>
-        <Search />
+        <NavLink href="/search">
+          <Search />
+        </NavLink>
 
         {user()?.profilePicture ? (
           <img src={user()?.profilePicture} />
