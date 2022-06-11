@@ -3,8 +3,8 @@ import { User } from "../../types";
 
 const demoUser = {
   id: "12121212",
-  fullName: "Rashid Shalu",
-  userName: "__ras.hi",
+  name: "Rashid Shalu",
+  username: "__ras.hi",
   email: "rashid@email.com",
   phone: "9875677287",
   profilePicture:

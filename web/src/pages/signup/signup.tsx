@@ -1,9 +1,13 @@
 import { createStore } from "solid-js/store";
-import { NavLink } from "solid-app-router";
+import { NavLink, useNavigate } from "solid-app-router";
+
+import { auth } from "../../config/axios";
+import { setUser } from "../../data-store/user";
 
 import styles from "./signup.module.scss";
 
 export const SignupPage = () => {
+  const navigate = useNavigate();
   const [form, setForm] = createStore({
     name: "",
     email: "",
@@ -25,7 +29,25 @@ export const SignupPage = () => {
 
   const formSublitHandler = (e: Event) => {
     e.preventDefault();
-    console.log(form);
+    auth
+      .post("/signup", {
+        name: form.name,
+        email: form.email,
+        username: form.username,
+        password: form.password,
+      })
+      .then(({ data }) => {
+        setUser(() => ({
+          id: data._id,
+          name: data.name,
+          email: data.username,
+          phone: "2323232",
+          username: data.username,
+          profilePicture: data.profilePicture,
+        }));
+        navigate("/");
+      })
+      .catch((e) => console.log(e.response.data));
   };
 
   return (

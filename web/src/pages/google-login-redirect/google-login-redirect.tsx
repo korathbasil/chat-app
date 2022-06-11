@@ -21,8 +21,8 @@ export const GoogleLoginRedirect = () => {
     if (result.data.verified_email) {
       setUser(() => ({
         id: "12121212",
-        fullName: result.data.name,
-        userName: "__ras.hi",
+        name: result.data.name,
+        username: "__ras.hi",
         email: "rashid@email.com",
         phone: "9875677287",
         profilePicture: result.data.picture,
