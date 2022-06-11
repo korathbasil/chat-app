@@ -13,6 +13,7 @@ exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const users_model_1 = require("./users.model");
 const users_repo_1 = require("./users.repo");
+const crypto_hash_1 = require("../util/crypto-hash");
 let UsersService = class UsersService {
     constructor(usersRepo) {
         this.usersRepo = usersRepo;
@@ -21,14 +22,26 @@ let UsersService = class UsersService {
         const user = await this.usersRepo.findOne({ username: username });
         if (user)
             throw new common_1.ConflictException('User already exists');
+        const hashedPassword = await (0, crypto_hash_1.hashString)(password);
         const newUser = {
             name,
             email,
             username,
-            password,
+            password: hashedPassword,
             role: users_model_1.Role.USER,
         };
         return this.usersRepo.insertOne(newUser);
+    }
+    async loginUser(username, password) {
+        const user = await this.usersRepo.findOne({ username: username });
+        if (!user)
+            throw new common_1.NotFoundException('User not found');
+        if (!user.password)
+            throw new common_1.NotFoundException('User not found');
+        const doPasswordsMatch = await (0, crypto_hash_1.compareHash)(user.password, password);
+        if (!doPasswordsMatch)
+            throw new common_1.UnauthorizedException('Invalid password');
+        return user;
     }
 };
 UsersService = __decorate([

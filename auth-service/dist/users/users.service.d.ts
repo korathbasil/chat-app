@@ -6,4 +6,7 @@ export declare class UsersService {
     signupUser(name: string, email: string, username: string, password: string): Promise<User & {
         _id: any;
     }>;
+    loginUser(username: string, password: string): Promise<User & {
+        _id: any;
+    }>;
 }
