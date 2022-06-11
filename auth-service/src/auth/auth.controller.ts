@@ -1,12 +1,15 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('api/users')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('/signup')
-  postSignup() {}
+  postSignup(@Body() userData: CreateUserDto) {
+    const { name, email, username, password } = userData;
+  }
 
   @Post('/login')
   postLogin() {}
@@ -15,7 +18,5 @@ export class AuthController {
   postLogout() {}
 
   @Get('/current-user')
-  getCurrentUser(): string {
-    return this.authService.getHello();
-  }
+  getCurrentUser() {}
 }

@@ -1,3 +1,3 @@
 export declare class AuthService {
-    getHello(): string;
+    signupUser(name: string, email: string, username: string, password: string): void;
 }
