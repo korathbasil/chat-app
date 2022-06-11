@@ -16,18 +16,39 @@ let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
-    getHello() {
+    postSignup() { }
+    postLogin() { }
+    postLogout() { }
+    getCurrentUser() {
         return this.authService.getHello();
     }
 };
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Post)('/signup'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "postSignup", null);
+__decorate([
+    (0, common_1.Post)('/login'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "postLogin", null);
+__decorate([
+    (0, common_1.Post)('/logout'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "postLogout", null);
+__decorate([
+    (0, common_1.Get)('/current-user'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", String)
-], AuthController.prototype, "getHello", null);
+], AuthController.prototype, "getCurrentUser", null);
 AuthController = __decorate([
-    (0, common_1.Controller)('auth'),
+    (0, common_1.Controller)('api/users'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);
 exports.AuthController = AuthController;
