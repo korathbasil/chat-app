@@ -95,7 +95,7 @@ export class UsersController {
       });
       return user;
     } catch (e) {
-      return e;
+      throw e;
     }
   }
 

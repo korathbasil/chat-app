@@ -11,7 +11,9 @@ export declare class UsersController {
     postSignup(userData: CreateUserDto, res: Response): Promise<User & {
         _id: any;
     }>;
-    postLogin(loginData: LoginUserDto, res: Response): Promise<any>;
+    postLogin(loginData: LoginUserDto, res: Response): Promise<User & {
+        _id: any;
+    }>;
     postLogout(res: Response): void;
     getCurrentUser(req: Request, res: Response): Promise<User & {
         _id: any;

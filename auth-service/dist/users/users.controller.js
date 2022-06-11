@@ -62,7 +62,7 @@ let UsersController = class UsersController {
             return user;
         }
         catch (e) {
-            return e;
+            throw e;
         }
     }
     postLogout(res) {
