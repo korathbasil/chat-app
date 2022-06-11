@@ -7,7 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 
-	db "github.com/korathbasil/chat-app/server/database"
+	db "github.com/korathbasil/chat-app/posts-service/database"
 )
 
 func InsertOnePost(post Post) {

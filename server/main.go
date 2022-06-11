@@ -6,7 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 
-	"github.com/korathbasil/chat-app/server/posts"
+	"github.com/korathbasil/chat-app/posts-service/posts"
 )
 
 func main() {

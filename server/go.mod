@@ -1,4 +1,4 @@
-module github.com/korathbasil/chat-app/server
+module github.com/korathbasil/chat-app/posts-service
 
 go 1.16
 
