@@ -15,12 +15,6 @@ func main() {
 
 	app.Use(cors.New())
 
-	// Or extend your config for customization
-	app.Use(cors.New(cors.Config{
-		AllowOrigins: "http://localhost:3000",
-		AllowHeaders: "Origin, Content-Type, Accept",
-	}))
-
 	apiGroup := app.Group("/api")
 	v1ApiGroup := apiGroup.Group("/v1")
 

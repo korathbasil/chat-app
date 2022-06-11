@@ -34,21 +34,6 @@ func googleOauthCallbackHandler(c *fiber.Ctx) error {
 
 	code := body.Code
 
-	// state := c.Query("state")
-
-	// if state != "chat-app-auth-state" {
-	// 	fmt.Println(c.Query("state"))
-	// }
-
-	// code := c.Query("code")
-	// values, err := url.ParseQuery(string(c.Body()))
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// code := values["code"][0]
-	// fmt.Println(code)
-
 	if code != "" {
 		googleConfig := config.SetupGoogleOauthConfig()
 

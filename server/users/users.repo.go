@@ -18,6 +18,17 @@ func InsertOneUser(user User) {
 	}
 }
 
+func FindUserByFilter(filter primitive.M) bson.M {
+	var user bson.M
+	err := db.UsersCollection.FindOne(context.Background(), filter).Decode(&user)
+
+	if err != nil {
+		return nil
+	}
+
+	return user
+}
+
 func FindAllUsers() []primitive.M {
 	cursor, err := db.UsersCollection.Find(context.Background(), bson.D{})
 
