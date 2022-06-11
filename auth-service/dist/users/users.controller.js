@@ -25,7 +25,7 @@ let UsersController = class UsersController {
         this.usersService = usersService;
         this.jwtService = jwtService;
     }
-    async postSignup(userData) {
+    async postSignup(userData, res) {
         const { name, email, username, password } = userData;
         try {
             const savedUser = await this.usersService.signupUser(name, email, username, password);
@@ -36,13 +36,16 @@ let UsersController = class UsersController {
                 profilePicture: savedUser.profilePicture,
             });
             savedUser.token = token;
+            res.cookie('token', token, {
+                httpOnly: true,
+            });
             return savedUser;
         }
         catch (e) {
             return e;
         }
     }
-    async postLogin(loginData) {
+    async postLogin(loginData, res) {
         const { username, password } = loginData;
         try {
             const user = await this.usersService.loginUser(username, password);
@@ -53,15 +56,38 @@ let UsersController = class UsersController {
                 profilePicture: user.profilePicture,
             });
             user.token = token;
+            res.cookie('token', token, {
+                httpOnly: true,
+            });
             return user;
         }
         catch (e) {
             return e;
         }
     }
-    postLogout() { }
-    getCurrentUser() {
-        return 'Hello';
+    postLogout(res) {
+        res.clearCookie('token');
+        res.status(200);
+        return;
+    }
+    async getCurrentUser(req, res) {
+        const token = req.cookies['token'];
+        if (!token)
+            throw new common_1.UnauthorizedException('Please login to continue');
+        try {
+            const userData = await this.jwtService.verifyAsync(token, {
+                secret: 'asdfgh',
+            });
+            const loggedInUser = await this.usersService.getLoggedInUser(userData._id);
+            loggedInUser.token = token;
+            res.cookie('token', token, {
+                httpOnly: true,
+            });
+            return loggedInUser;
+        }
+        catch (e) {
+            throw new common_1.UnauthorizedException('Please login to continue');
+        }
     }
     getHello() {
         return 'Hello';
@@ -72,29 +98,35 @@ __decorate([
     (0, common_1.UsePipes)(common_1.ValidationPipe),
     (0, common_1.Post)('/signup'),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
+    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto, Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "postSignup", null);
 __decorate([
     (0, serialize_interceptor_1.UseSerializeInterceptor)(user_dto_1.UserDto),
     (0, common_1.Post)('/login'),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [login_user_dto_1.LoginUserDto]),
+    __metadata("design:paramtypes", [login_user_dto_1.LoginUserDto, Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "postLogin", null);
 __decorate([
     (0, common_1.Post)('/logout'),
+    __param(0, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "postLogout", null);
 __decorate([
+    (0, serialize_interceptor_1.UseSerializeInterceptor)(user_dto_1.UserDto),
     (0, common_1.Get)('/current-user'),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getCurrentUser", null);
 __decorate([
     (0, common_1.Get)(),

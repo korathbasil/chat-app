@@ -3,9 +3,13 @@ import {
   Controller,
   Get,
   Post,
+  Req,
+  Res,
+  UnauthorizedException,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { JwtService } from '@nestjs/jwt';
 
 import { UsersService } from '../users/users.service';
@@ -25,7 +29,10 @@ export class UsersController {
   @UseSerializeInterceptor(UserDto)
   @UsePipes(ValidationPipe)
   @Post('/signup')
-  async postSignup(@Body() userData: CreateUserDto) {
+  async postSignup(
+    @Body() userData: CreateUserDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const { name, email, username, password } = userData;
     try {
       const savedUser = await this.usersService.signupUser(
@@ -49,6 +56,10 @@ export class UsersController {
         }
       ).token = token;
 
+      res.cookie('token', token, {
+        httpOnly: true,
+      });
+
       return savedUser;
     } catch (e) {
       return e;
@@ -57,7 +68,10 @@ export class UsersController {
 
   @UseSerializeInterceptor(UserDto)
   @Post('/login')
-  async postLogin(@Body() loginData: LoginUserDto) {
+  async postLogin(
+    @Body() loginData: LoginUserDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const { username, password } = loginData;
     try {
       const user = await this.usersService.loginUser(username, password);
@@ -76,6 +90,9 @@ export class UsersController {
         }
       ).token = token;
 
+      res.cookie('token', token, {
+        httpOnly: true,
+      });
       return user;
     } catch (e) {
       return e;
@@ -83,11 +100,53 @@ export class UsersController {
   }
 
   @Post('/logout')
-  postLogout() {}
+  postLogout(@Res({ passthrough: true }) res: Response) {
+    res.clearCookie('token');
 
+    res.status(200);
+    return;
+  }
+
+  @UseSerializeInterceptor(UserDto)
   @Get('/current-user')
-  getCurrentUser() {
-    return 'Hello';
+  async getCurrentUser(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const token = req.cookies['token'];
+
+    if (!token) throw new UnauthorizedException('Please login to continue');
+
+    type JwtPayload = {
+      _id: string;
+      name: string;
+      username: string;
+      profilePicture: string;
+    };
+
+    try {
+      const userData: JwtPayload = await this.jwtService.verifyAsync(token, {
+        secret: 'asdfgh',
+      });
+
+      const loggedInUser = await this.usersService.getLoggedInUser(
+        userData._id,
+      );
+
+      (
+        loggedInUser as User & {
+          _id: any;
+          token: string;
+        }
+      ).token = token;
+
+      res.cookie('token', token, {
+        httpOnly: true,
+      });
+      return loggedInUser;
+    } catch (e) {
+      throw new UnauthorizedException('Please login to continue');
+    }
   }
 
   @Get()

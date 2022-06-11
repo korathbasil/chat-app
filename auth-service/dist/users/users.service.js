@@ -43,6 +43,9 @@ let UsersService = class UsersService {
             throw new common_1.UnauthorizedException('Invalid password');
         return user;
     }
+    getLoggedInUser(id) {
+        return this.usersRepo.findOne({ _id: id });
+    }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),

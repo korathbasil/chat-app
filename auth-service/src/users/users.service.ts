@@ -49,4 +49,8 @@ export class UsersService {
 
     return user;
   }
+
+  getLoggedInUser(id: string) {
+    return this.usersRepo.findOne({ _id: id });
+  }
 }
