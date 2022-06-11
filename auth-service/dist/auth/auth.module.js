@@ -11,12 +11,19 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const users_module_1 = require("../users/users.module");
 const users_controller_1 = require("../users/users.controller");
+const jwt_1 = require("@nestjs/jwt");
+const passport_1 = require("@nestjs/passport");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [
             mongoose_1.MongooseModule.forRoot('mongodb://localhost:27017/ngage-plus'),
+            passport_1.PassportModule,
+            jwt_1.JwtModule.register({
+                secret: 'asdfgh',
+                signOptions: { expiresIn: '60s' },
+            }),
             users_module_1.UsersModule,
         ],
         controllers: [users_controller_1.UsersController],

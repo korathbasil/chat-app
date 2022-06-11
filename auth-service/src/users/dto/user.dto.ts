@@ -24,4 +24,7 @@ export class UserDto {
 
   @Expose()
   updatedAt: string;
+
+  @Expose()
+  token: string;
 }

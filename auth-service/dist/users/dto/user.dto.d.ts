@@ -7,4 +7,5 @@ export declare class UserDto {
     profilePicture: string;
     createdAt: string;
     updatedAt: string;
+    token: string;
 }

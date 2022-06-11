@@ -45,5 +45,9 @@ __decorate([
     (0, class_transformer_1.Expose)(),
     __metadata("design:type", String)
 ], UserDto.prototype, "updatedAt", void 0);
+__decorate([
+    (0, class_transformer_1.Expose)(),
+    __metadata("design:type", String)
+], UserDto.prototype, "token", void 0);
 exports.UserDto = UserDto;
 //# sourceMappingURL=user.dto.js.map

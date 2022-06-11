@@ -14,19 +14,28 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
+const jwt_1 = require("@nestjs/jwt");
 const users_service_1 = require("../users/users.service");
 const create_user_dto_1 = require("../users/dto/create-user.dto");
 const serialize_interceptor_1 = require("./interceptors/serialize.interceptor");
 const user_dto_1 = require("./dto/user.dto");
 const login_user_dto_1 = require("./dto/login-user.dto");
 let UsersController = class UsersController {
-    constructor(usersService) {
+    constructor(usersService, jwtService) {
         this.usersService = usersService;
+        this.jwtService = jwtService;
     }
     async postSignup(userData) {
         const { name, email, username, password } = userData;
         try {
             const savedUser = await this.usersService.signupUser(name, email, username, password);
+            const token = await this.jwtService.signAsync({
+                _id: savedUser._id,
+                name: savedUser.name,
+                username: savedUser.username,
+                profilePicture: savedUser.profilePicture,
+            });
+            savedUser.token = token;
             return savedUser;
         }
         catch (e) {
@@ -37,6 +46,13 @@ let UsersController = class UsersController {
         const { username, password } = loginData;
         try {
             const user = await this.usersService.loginUser(username, password);
+            const token = await this.jwtService.signAsync({
+                _id: user._id,
+                name: user.name,
+                username: user.username,
+                profilePicture: user.profilePicture,
+            });
+            user.token = token;
             return user;
         }
         catch (e) {
@@ -88,7 +104,8 @@ __decorate([
 ], UsersController.prototype, "getHello", null);
 UsersController = __decorate([
     (0, common_1.Controller)('/api/v1/users'),
-    __metadata("design:paramtypes", [users_service_1.UsersService])
+    __metadata("design:paramtypes", [users_service_1.UsersService,
+        jwt_1.JwtService])
 ], UsersController);
 exports.UsersController = UsersController;
 //# sourceMappingURL=users.controller.js.map
