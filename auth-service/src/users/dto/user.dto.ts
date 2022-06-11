@@ -17,6 +17,9 @@ export class UserDto {
   username: string;
 
   @Expose()
+  profilePicture: string;
+
+  @Expose()
   createdAt: string;
 
   @Expose()

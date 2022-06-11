@@ -18,6 +18,7 @@ const users_service_1 = require("../users/users.service");
 const create_user_dto_1 = require("../users/dto/create-user.dto");
 const serialize_interceptor_1 = require("./interceptors/serialize.interceptor");
 const user_dto_1 = require("./dto/user.dto");
+const login_user_dto_1 = require("./dto/login-user.dto");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
@@ -32,7 +33,16 @@ let UsersController = class UsersController {
             return e;
         }
     }
-    postLogin() { }
+    async postLogin(loginData) {
+        const { username, password } = loginData;
+        try {
+            const user = await this.usersService.loginUser(username, password);
+            return user;
+        }
+        catch (e) {
+            return e;
+        }
+    }
     postLogout() { }
     getCurrentUser() {
         return 'Hello';
@@ -51,10 +61,12 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "postSignup", null);
 __decorate([
+    (0, serialize_interceptor_1.UseSerializeInterceptor)(user_dto_1.UserDto),
     (0, common_1.Post)('/login'),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [login_user_dto_1.LoginUserDto]),
+    __metadata("design:returntype", Promise)
 ], UsersController.prototype, "postLogin", null);
 __decorate([
     (0, common_1.Post)('/logout'),

@@ -4,6 +4,7 @@ export declare class UserDto {
     email: string;
     phone: string;
     username: string;
+    profilePicture: string;
     createdAt: string;
     updatedAt: string;
 }

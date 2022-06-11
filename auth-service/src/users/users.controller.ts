@@ -11,6 +11,7 @@ import { UsersService } from '../users/users.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UseSerializeInterceptor } from './interceptors/serialize.interceptor';
 import { UserDto } from './dto/user.dto';
+import { LoginUserDto } from './dto/login-user.dto';
 
 @Controller('/api/v1/users')
 export class UsersController {
@@ -35,8 +36,18 @@ export class UsersController {
     }
   }
 
+  @UseSerializeInterceptor(UserDto)
   @Post('/login')
-  postLogin() {}
+  async postLogin(@Body() loginData: LoginUserDto) {
+    const { username, password } = loginData;
+    try {
+      const user = await this.usersService.loginUser(username, password);
+
+      return user;
+    } catch (e) {
+      return e;
+    }
+  }
 
   @Post('/logout')
   postLogout() {}
