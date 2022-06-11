@@ -11,4 +11,4 @@ const demoUser = {
     "https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=2000",
 } as User;
 
-export const [user, setUser] = createSignal<User | null>();
+export const [user, setUser] = createSignal<User | null>(demoUser);
