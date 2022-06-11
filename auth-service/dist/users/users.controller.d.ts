@@ -14,5 +14,4 @@ export declare class UsersController {
     getCurrentUser(req: Request, res: Response): Promise<User & {
         _id: any;
     }>;
-    getHello(): string;
 }

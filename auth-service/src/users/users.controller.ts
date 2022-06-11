@@ -148,9 +148,4 @@ export class UsersController {
       throw new UnauthorizedException('Please login to continue');
     }
   }
-
-  @Get()
-  getHello() {
-    return 'Hello';
-  }
 }

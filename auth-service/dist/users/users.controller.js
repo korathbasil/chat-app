@@ -89,9 +89,6 @@ let UsersController = class UsersController {
             throw new common_1.UnauthorizedException('Please login to continue');
         }
     }
-    getHello() {
-        return 'Hello';
-    }
 };
 __decorate([
     (0, serialize_interceptor_1.UseSerializeInterceptor)(user_dto_1.UserDto),
@@ -128,12 +125,6 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getCurrentUser", null);
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], UsersController.prototype, "getHello", null);
 UsersController = __decorate([
     (0, common_1.Controller)('/api/v1/users'),
     __metadata("design:paramtypes", [users_service_1.UsersService,
