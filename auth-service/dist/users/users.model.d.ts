@@ -20,7 +20,7 @@
 /// <reference types="mongoose/types/utility" />
 /// <reference types="mongoose/types/validation" />
 import { Document } from 'mongoose';
-declare class UserAccount extends Document {
+export declare class UserAccount extends Document {
     kind: string;
     uid: string;
 }
@@ -37,6 +37,6 @@ export declare class User extends Document {
     password?: string;
     accounts?: UserAccount[];
     role: Role;
+    profilePicture: string;
 }
 export declare const userSchema: import("mongoose").Schema<User, import("mongoose").Model<User, any, any, any>, {}, {}, any>;
-export {};

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userSchema = exports.User = exports.Role = void 0;
+exports.userSchema = exports.User = exports.Role = exports.UserAccount = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 class UserAccount extends mongoose_2.Document {
@@ -22,6 +22,7 @@ __decorate([
     (0, mongoose_1.Prop)({ type: String, required: true }),
     __metadata("design:type", String)
 ], UserAccount.prototype, "uid", void 0);
+exports.UserAccount = UserAccount;
 var Role;
 (function (Role) {
     Role["SUPERUSER"] = "SUPERUSER";
@@ -58,6 +59,10 @@ __decorate([
     (0, mongoose_1.Prop)({ type: String, required: true }),
     __metadata("design:type", String)
 ], User.prototype, "role", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: String, default: '' }),
+    __metadata("design:type", String)
+], User.prototype, "profilePicture", void 0);
 User = __decorate([
     (0, mongoose_1.Schema)({ timestamps: { createdAt: true, updatedAt: true } })
 ], User);

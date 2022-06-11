@@ -1,7 +1,7 @@
 import { Schema, SchemaFactory, Prop } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-class UserAccount extends Document {
+export class UserAccount extends Document {
   @Prop({ type: String, required: true })
   kind: string;
 
@@ -36,6 +36,9 @@ export class User extends Document {
 
   @Prop({ type: String, required: true })
   role: Role;
+
+  @Prop({ type: String, default: '' })
+  profilePicture: string;
 }
 
 export const userSchema = SchemaFactory.createForClass(User);

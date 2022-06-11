@@ -16,14 +16,21 @@ exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("../users/users.service");
 const create_user_dto_1 = require("../users/dto/create-user.dto");
+const serialize_interceptor_1 = require("./interceptors/serialize.interceptor");
+const user_dto_1 = require("./dto/user.dto");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
     }
     async postSignup(userData) {
         const { name, email, username, password } = userData;
-        const savedUser = await this.usersService.signupUser(name, email, username, password);
-        return savedUser;
+        try {
+            const savedUser = await this.usersService.signupUser(name, email, username, password);
+            return savedUser;
+        }
+        catch (e) {
+            return e;
+        }
     }
     postLogin() { }
     postLogout() { }
@@ -35,8 +42,9 @@ let UsersController = class UsersController {
     }
 };
 __decorate([
-    (0, common_1.Post)('/signup'),
+    (0, serialize_interceptor_1.UseSerializeInterceptor)(user_dto_1.UserDto),
     (0, common_1.UsePipes)(common_1.ValidationPipe),
+    (0, common_1.Post)('/signup'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),

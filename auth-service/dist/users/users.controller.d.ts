@@ -3,9 +3,7 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
-    postSignup(userData: CreateUserDto): Promise<import("./users.model").User & {
-        _id: any;
-    }>;
+    postSignup(userData: CreateUserDto): Promise<any>;
     postLogin(): void;
     postLogout(): void;
     getCurrentUser(): string;

@@ -17,7 +17,10 @@ let UsersService = class UsersService {
     constructor(usersRepo) {
         this.usersRepo = usersRepo;
     }
-    signupUser(name, email, username, password) {
+    async signupUser(name, email, username, password) {
+        const user = await this.usersRepo.findOne({ username: username });
+        if (user)
+            throw new common_1.ConflictException('User already exists');
         const newUser = {
             name,
             email,
