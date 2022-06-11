@@ -7,7 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-var UsersCollection *mongo.Collection
+var PostsCollection *mongo.Collection
 
 func init() {
 	mongoDbClient, err := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
@@ -16,5 +16,5 @@ func init() {
 		panic("Cannot connect to the Database")
 	}
 
-	UsersCollection = mongoDbClient.Database("chat-app").Collection("users")
+	PostsCollection = mongoDbClient.Database("ngage-plus").Collection("posts")
 }
