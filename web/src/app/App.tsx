@@ -7,6 +7,7 @@ import {
   HomePage,
   ChatPage,
   LoginPage,
+  SignupPage,
   SearchPage,
   GoogleLoginRedirect,
 } from "../pages";
@@ -16,6 +17,7 @@ const App: Component = () => {
     <div>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
         <Route path="/login/google" element={<GoogleLoginRedirect />} />
         <Route path="/chat" element={<AuthComponent child={ChatPage} />} />
         <Route path="/search" element={<AuthComponent child={SearchPage} />} />
