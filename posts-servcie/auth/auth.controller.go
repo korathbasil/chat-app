@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/korathbasil/chat-app/server/config"
+	"github.com/korathbasil/chat-app/posts-service/config"
 )
 
 func InitializeRoutes(router fiber.Router) {
