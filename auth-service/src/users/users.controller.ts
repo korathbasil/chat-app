@@ -62,7 +62,7 @@ export class UsersController {
 
       return savedUser;
     } catch (e) {
-      return e;
+      throw e;
     }
   }
 

@@ -8,7 +8,9 @@ export declare class UsersController {
     private readonly usersService;
     private readonly jwtService;
     constructor(usersService: UsersService, jwtService: JwtService);
-    postSignup(userData: CreateUserDto, res: Response): Promise<any>;
+    postSignup(userData: CreateUserDto, res: Response): Promise<User & {
+        _id: any;
+    }>;
     postLogin(loginData: LoginUserDto, res: Response): Promise<any>;
     postLogout(res: Response): void;
     getCurrentUser(req: Request, res: Response): Promise<User & {

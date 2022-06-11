@@ -42,7 +42,7 @@ let UsersController = class UsersController {
             return savedUser;
         }
         catch (e) {
-            return e;
+            throw e;
         }
     }
     async postLogin(loginData, res) {
