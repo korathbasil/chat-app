@@ -1,5 +1,7 @@
+import { NavLink } from "solid-app-router";
+
 import styles from "./login.module.scss";
-import { Google } from "../../assets/icons";
+// import { Google } from "../../assets/icons";
 
 export const LoginPage = () => {
   return (
@@ -13,14 +15,21 @@ export const LoginPage = () => {
           <span>loved ones</span>
         </h2>
 
+        <form>
+          <label for="username">Username</label>
+          <input type="username" name="username" />
+          <label for="password">Password</label>
+          <input type="password" name="password" />
+          <input type="submit" value="Login" />
+          <NavLink href="/signup">Create Account</NavLink>
+        </form>
+
         <div class={styles.actions}>
-          <a href="http://localhost:8000/api/v1/auth/google/login">
+          {/* <a href="http://localhost:8000/api/v1/auth/google/login">
             <Google />
             <h2>Login with Google</h2>
-          </a>
+          </a> */}
         </div>
-
-        {/* <div onClick={OpenNewAuthWindow}>g</div> */}
       </div>
     </main>
   );

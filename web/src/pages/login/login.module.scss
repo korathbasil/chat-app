@@ -10,13 +10,46 @@
         h1 {
             font-size: 30px;
             font-weight: 800;
-            margin-bottom: 150px;
+            margin-bottom: 50px;
         }
 
         h2 {
             font-size: 50px;
             display: flex;
             flex-direction: column;
+        }
+
+        form {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+
+            label {
+                margin-bottom: 5px;
+            }
+
+            input {
+                margin-bottom: 10px;
+                font-size: 16px;
+                padding: 10px;
+                border-radius: 10px;
+                border: 1px solid black;
+                outline: none;
+            }
+
+            input[type=submit] {
+                background-color: black;
+                color: white;
+                font-weight: 800;
+                padding-inline-start: 10px 30px;
+                width: fit-content;
+                margin-top: 10px;
+            }
+
+            a {
+                margin-top: 10px;
+                text-decoration: underline;
+            }
         }
 
         .actions {
