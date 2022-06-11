@@ -25,7 +25,7 @@ __decorate([
 var Role;
 (function (Role) {
     Role["SUPERUSER"] = "SUPERUSER";
-    Role["MANAGER"] = "MANAGER";
+    Role["PREMIUMUSER"] = "PREMIUMUSER";
     Role["USER"] = "USER";
 })(Role = exports.Role || (exports.Role = {}));
 let User = class User extends mongoose_2.Document {
@@ -39,9 +39,13 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: String, required: true }),
+    (0, mongoose_1.Prop)({ type: String }),
     __metadata("design:type", String)
 ], User.prototype, "phone", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: String, required: true }),
+    __metadata("design:type", String)
+], User.prototype, "username", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ type: String }),
     __metadata("design:type", String)

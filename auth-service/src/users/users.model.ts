@@ -10,7 +10,7 @@ class UserAccount extends Document {
 }
 export enum Role {
   SUPERUSER = 'SUPERUSER',
-  MANAGER = 'MANAGER',
+  PREMIUMUSER = 'PREMIUMUSER',
   USER = 'USER',
 }
 
@@ -22,8 +22,11 @@ export class User extends Document {
   @Prop({ type: String, required: true })
   email: string;
 
-  @Prop({ type: String, required: true })
+  @Prop({ type: String })
   phone?: string;
+
+  @Prop({ type: String, required: true })
+  username: string;
 
   @Prop({ type: String })
   password?: string;

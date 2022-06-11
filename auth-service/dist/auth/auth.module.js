@@ -8,13 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthModule = void 0;
 const common_1 = require("@nestjs/common");
+const mongoose_1 = require("@nestjs/mongoose");
 const users_module_1 = require("../users/users.module");
 const users_controller_1 = require("../users/users.controller");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
     (0, common_1.Module)({
-        imports: [users_module_1.UsersModule],
+        imports: [
+            mongoose_1.MongooseModule.forRoot('mongodb://localhost:27017/ngage-plus'),
+            users_module_1.UsersModule,
+        ],
         controllers: [users_controller_1.UsersController],
     })
 ], AuthModule);

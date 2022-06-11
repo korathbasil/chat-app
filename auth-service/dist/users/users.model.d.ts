@@ -26,13 +26,14 @@ declare class UserAccount extends Document {
 }
 export declare enum Role {
     SUPERUSER = "SUPERUSER",
-    MANAGER = "MANAGER",
+    PREMIUMUSER = "PREMIUMUSER",
     USER = "USER"
 }
 export declare class User extends Document {
     name: string;
     email: string;
     phone?: string;
+    username: string;
     password?: string;
     accounts?: UserAccount[];
     role: Role;

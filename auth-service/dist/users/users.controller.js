@@ -17,11 +17,13 @@ const common_1 = require("@nestjs/common");
 const users_service_1 = require("../users/users.service");
 const create_user_dto_1 = require("../users/dto/create-user.dto");
 let UsersController = class UsersController {
-    constructor(authService) {
-        this.authService = authService;
+    constructor(usersService) {
+        this.usersService = usersService;
     }
-    postSignup(userData) {
+    async postSignup(userData) {
         const { name, email, username, password } = userData;
+        const savedUser = await this.usersService.signupUser(name, email, username, password);
+        return savedUser;
     }
     postLogin() { }
     postLogout() { }
@@ -34,10 +36,11 @@ let UsersController = class UsersController {
 };
 __decorate([
     (0, common_1.Post)('/signup'),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UsersController.prototype, "postSignup", null);
 __decorate([
     (0, common_1.Post)('/login'),

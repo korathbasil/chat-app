@@ -15,26 +15,30 @@ class CreateUserDto {
 }
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: "Name shouldn't be empty" }),
-    (0, class_validator_1.Min)(5, { message: 'Name should have atleast 5 characters' }),
-    (0, class_validator_1.Max)(20, { message: "Name shouldn't be more than 20 characters" }),
+    (0, class_validator_1.Length)(5, 20, {
+        message: 'Name should contain minimum of 5 characters and only allowed maximum of 20 characters',
+    }),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: "Email shouldn't be empty" }),
-    (0, class_validator_1.Min)(5, { message: 'Email should have atleast 5 characters' }),
-    (0, class_validator_1.Max)(30, { message: "Email shouldn't be more than 30 characters" }),
+    (0, class_validator_1.Length)(5, 30, {
+        message: 'Email should contain minimum of 5 characters and only allowed maximum of 30 characters',
+    }),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "email", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: "Username shouldn't be empty" }),
-    (0, class_validator_1.Min)(5, { message: 'Username should have atleast 5 characters' }),
-    (0, class_validator_1.Max)(20, { message: "Username shouldn't be more than 20 characters" }),
+    (0, class_validator_1.Length)(5, 20, {
+        message: 'Username should contain minimum of 5 characters and only allowed maximum of 20 characters',
+    }),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "username", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: "Password shouldn't be empty" }),
-    (0, class_validator_1.Min)(8, { message: 'Password should have atleast 8 characters' }),
-    (0, class_validator_1.Max)(16, { message: "Password shouldn't be more than 16 characters" }),
+    (0, class_validator_1.Length)(8, 16, {
+        message: 'Password should contain minimum of 8 characters and only allowed maximum of 16 characters',
+    }),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "password", void 0);
 exports.CreateUserDto = CreateUserDto;
