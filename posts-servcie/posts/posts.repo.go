@@ -2,20 +2,24 @@ package posts
 
 import (
 	"context"
+	"errors"
 	"log"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 
 	db "github.com/korathbasil/chat-app/posts-service/database"
 )
 
-func InsertOnePost(post Post) {
-	_, err := db.PostsCollection.InsertOne(context.TODO(), post)
+func InsertOnePost(post Post) (*mongo.InsertOneResult, error) {
+	result, err := db.PostsCollection.InsertOne(context.TODO(), post)
 
 	if err != nil {
-		panic("Cant perform Action")
+		return nil, errors.New("operation failed")
 	}
+
+	return result, nil
 }
 
 func FindPostByFilter(filter primitive.M) bson.M {
