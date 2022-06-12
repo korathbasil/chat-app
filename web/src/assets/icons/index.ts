@@ -6,3 +6,6 @@ export * from "./NewVideoCallIcon";
 export * from "./mic-icon";
 export * from "./send-icon";
 export * from "./google-icon";
+export * from "./feed-icon";
+export * from "./chats-icon";
+export * from "./finder-icon";

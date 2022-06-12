@@ -1,16 +1,8 @@
 import { Component } from "solid-js";
-import { Routes, Route, Navigate } from "solid-app-router";
+import { Routes, Route } from "solid-app-router";
 
-import { user } from "../data-store/user";
-
-import {
-  HomePage,
-  ChatPage,
-  LoginPage,
-  SignupPage,
-  SearchPage,
-  GoogleLoginRedirect,
-} from "../pages";
+import { PrivateApp } from "./private-app";
+import { LoginPage, SignupPage, GoogleLoginRedirect } from "../pages";
 
 const App: Component = () => {
   return (
@@ -19,17 +11,10 @@ const App: Component = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login/google" element={<GoogleLoginRedirect />} />
-        <Route path="/chat" element={<AuthComponent child={ChatPage} />} />
-        <Route path="/search" element={<AuthComponent child={SearchPage} />} />
-        <Route path="/" element={<AuthComponent child={HomePage} />} />
       </Routes>
+      <PrivateApp />
     </div>
   );
-};
-
-const AuthComponent: Component<{ child: Component }> = ({ child }) => {
-  if (user()) return <>{child}</>;
-  else return <Navigate href="/login" />;
 };
 
 export default App;
