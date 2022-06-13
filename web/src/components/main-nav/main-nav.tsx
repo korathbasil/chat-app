@@ -12,7 +12,7 @@ export const MianNav = () => {
           <p>Feed</p>
         </li>
       </NavLink>
-      <NavLink href="/chat">
+      <NavLink href="/chats">
         <li>
           <Chats size="25px" />
           <p>Chats</p>
