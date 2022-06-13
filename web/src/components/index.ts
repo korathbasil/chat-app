@@ -8,3 +8,4 @@ export * from "./chat-actions/chat-actions";
 export * from "./search-header/search-header";
 export * from "./search-input/search-input";
 export * from "./main-nav/main-nav";
+export * from "./custom-header/custom-header";

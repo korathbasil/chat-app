@@ -1,21 +1,36 @@
-import type { Component } from "solid-js";
-import { Navigate, Route, Routes } from "solid-app-router";
+import { Component, createEffect, createSignal } from "solid-js";
+import { Navigate, Route, Routes, useLocation } from "solid-app-router";
 
 import { user } from "../data-store/user";
 
 import { MianNav } from "../components";
-import { FeedPage, ChatsPage, SearchPage } from "../pages";
+import { FeedPage, ChatsPage, SearchPage, NewPostPage } from "../pages";
 
 export const PrivateApp = () => {
+  const location = useLocation();
+  const [hideMainNav, setHideMainNav] = createSignal(false);
+
+  const hideNavRoutes = ["/new-post"];
+
+  createEffect(() => {
+    const currPath = location.pathname;
+    const mainPath = currPath.split("/")[1];
+
+    setHideMainNav(hideNavRoutes.includes(mainPath));
+  });
   return (
     <main>
       <Routes>
         <Route path="/search" element={<AuthComponent child={SearchPage} />} />
         <Route path="/chats" element={<AuthComponent child={ChatsPage} />} />
         <Route path="/feed" element={<AuthComponent child={FeedPage} />} />
+        <Route
+          path="/new-post"
+          element={<AuthComponent child={NewPostPage} />}
+        />
         <Route path="/" element={<AuthComponent child={FeedPage} />} />
       </Routes>
-      <MianNav />
+      {!hideMainNav && <MianNav />}
     </main>
   );
 };

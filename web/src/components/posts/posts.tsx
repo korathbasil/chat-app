@@ -3,6 +3,7 @@ import { For } from "solid-js";
 
 import styles from "./posts.module.scss";
 import { Comments, HeartOutlined } from "../../assets/icons";
+import { NavLink } from "solid-app-router";
 
 export const Posts = () => {
   const posts = [
@@ -48,6 +49,7 @@ export const Posts = () => {
   return (
     <section class={styles.posts}>
       <p>FEED</p>
+      <NavLink href="/new-post">New Post</NavLink>
       <div>
         <For each={posts}>
           {(post) => {
