@@ -10,7 +10,7 @@ export const PrivateApp = () => {
   const location = useLocation();
   const [hideMainNav, setHideMainNav] = createSignal(false);
 
-  const hideNavRoutes = ["/new-post"];
+  const hideNavRoutes = ["new-post"];
 
   createEffect(() => {
     const currPath = location.pathname;
@@ -30,7 +30,7 @@ export const PrivateApp = () => {
         />
         <Route path="/" element={<AuthComponent child={FeedPage} />} />
       </Routes>
-      {!hideMainNav && <MianNav />}
+      {!hideMainNav() && <MianNav />}
     </main>
   );
 };

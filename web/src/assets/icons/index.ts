@@ -12,3 +12,6 @@ export * from "./finder-icon";
 export * from "./heart-filled-icon";
 export * from "./heart-outlined-icon";
 export * from "./comments-icon";
+export * from "./close-icon";
+export * from "./add-photo";
+export * from "./add-video";
