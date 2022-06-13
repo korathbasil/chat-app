@@ -11,8 +11,8 @@ const App: Component = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login/google" element={<GoogleLoginRedirect />} />
+        <Route path="/" element={<PrivateApp />} />
       </Routes>
-      <PrivateApp />
     </div>
   );
 };
