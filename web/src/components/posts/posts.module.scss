@@ -1,0 +1,43 @@
+.posts {
+    padding: 0 20px;
+
+    .post {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid lightgrey;
+        border-radius: 10px;
+        margin: 10px 0;
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+
+            .left {
+                display: flex;
+                align-items: center;
+
+                img {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 999px;
+                    margin-right: 10px;
+                }
+    
+                div {
+                }
+            }
+
+            
+        }
+    }
+}
+
+
+.media {
+    img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+}
