@@ -1,8 +1,9 @@
 .nav {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    border-top: 1px solid lightgrey;
 
     display: flex;
     background-color: white;

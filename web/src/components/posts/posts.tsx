@@ -55,7 +55,6 @@ export const Posts = () => {
           }}
         </For>
       </div>
-      {/* <div class={styles.spacer200}></div> */}
     </section>
   );
 };
