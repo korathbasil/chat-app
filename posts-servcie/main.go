@@ -20,5 +20,5 @@ func main() {
 	postsRouter := v1ApiGroup.Group("/posts")
 	posts.InitializeRoutes(postsRouter)
 
-	log.Fatal(app.Listen(":8000"))
+	log.Fatal(app.Listen(":8002"))
 }
