@@ -9,7 +9,7 @@ import { Search, Profile } from "../../assets/icons";
 export const Header: Component = () => {
   return (
     <header class={styles.header}>
-      <h1>Ngage</h1>
+      <h1>Ngage+</h1>
       <div class={styles.right}>
         <NavLink href="/search">
           <Search />
