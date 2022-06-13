@@ -9,3 +9,6 @@ export * from "./google-icon";
 export * from "./feed-icon";
 export * from "./chats-icon";
 export * from "./finder-icon";
+export * from "./heart-filled-icon";
+export * from "./heart-outlined-icon";
+export * from "./comments-icon";

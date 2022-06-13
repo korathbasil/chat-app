@@ -1,6 +1,8 @@
 import type { Component } from "solid-js";
 import { For } from "solid-js";
+
 import styles from "./posts.module.scss";
+import { Comments, HeartOutlined } from "../../assets/icons";
 
 export const Posts = () => {
   const posts = [
@@ -20,6 +22,7 @@ export const Posts = () => {
             "https://www.adorama.com/alc/wp-content/uploads/2018/11/landscape-photography-tips-yosemite-valley-feature.jpg",
         },
       ],
+      caption: "Hello",
       createdAt: "19:36 AM",
     },
     {
@@ -38,6 +41,7 @@ export const Posts = () => {
             "https://www.adorama.com/alc/wp-content/uploads/2018/11/landscape-photography-tips-yosemite-valley-feature.jpg",
         },
       ],
+      caption: "Hello",
       createdAt: "19:36 AM",
     },
   ];
@@ -51,6 +55,7 @@ export const Posts = () => {
           }}
         </For>
       </div>
+      {/* <div class={styles.spacer200}></div> */}
     </section>
   );
 };
@@ -68,6 +73,7 @@ interface PostProps {
       type: "IMG" | "VDO";
       content: string;
     }[];
+    caption: string;
     createdAt: string;
   };
 }
@@ -89,7 +95,19 @@ const Post: Component<PostProps> = ({ post }) => {
         {post.text ? <PostText text={post.text} /> : null}
         {post.media.length > 0 ? <PostMedia media={post.media} /> : null}
       </div>
-      <div class={styles.bootom}></div>
+      <div class={styles.bottom}>
+        {post.caption && <p>{post.caption}</p>}
+        <div class={styles.actions}>
+          <div class={styles.like}>
+            <HeartOutlined size="15px" />
+            <p>218</p>
+          </div>
+          <div class={styles.comment}>
+            <Comments size="15px" />
+            <p>14</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -99,7 +117,11 @@ interface PostTextProps {
 }
 
 const PostText: Component<PostTextProps> = ({ text }) => {
-  return <div class={styles.textPost}>{text}</div>;
+  return (
+    <div class={styles.textPost}>
+      <p>{text}</p>
+    </div>
+  );
 };
 
 interface PostMediaProps {
