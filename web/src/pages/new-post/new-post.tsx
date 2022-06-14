@@ -1,11 +1,15 @@
 import { createSignal } from "solid-js";
-import { NavLink } from "solid-app-router";
+import { NavLink, useNavigate } from "solid-app-router";
+
+import { postsService } from "../../config/axios";
 
 import styles from "./new-post.module.scss";
 import { AddPhoto, AddVideo, BackNav } from "../../assets/icons";
 import { CustomHeader } from "../../components";
 
 export const NewPostPage = () => {
+  const navigate = useNavigate();
+  const [postText, setPostText] = createSignal("");
   const [image, setImage] = createSignal<File | null>(null);
 
   type FormEvent = Event & {
@@ -13,9 +17,31 @@ export const NewPostPage = () => {
     target: Element;
   };
 
-  const imagePickerHandler = (e: FormEvent) => {
-    console.log(e.currentTarget.files);
+  const FormSubmitHandler = (e: Event) => {
+    e.preventDefault();
 
+    const requestConfig = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    postsService
+      .post(
+        "/",
+        {
+          text: postText(),
+          images: image(),
+        },
+        requestConfig
+      )
+      .then(() => {
+        navigate("../");
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const imagePickerHandler = (e: FormEvent) => {
     let selectedImage: File | null;
     if (!e.currentTarget.files) {
       return;
@@ -31,13 +57,14 @@ export const NewPostPage = () => {
       <CustomHeader left={HeaderLeft} />
       <section class={styles.newPost}>
         <h2>Create post</h2>
-        <form>
+        <form onSubmit={FormSubmitHandler}>
           <textarea
             name=""
             id=""
             rows="5"
             maxLength={170}
             placeholder="Write something"
+            onChange={(e) => setPostText(e.currentTarget.value)}
           />
           {image() && (
             <div class={styles.media}>

@@ -10,4 +10,12 @@ const authInstance = axios.create({
   baseURL: "http://localhost:8001/api/v1/users",
 });
 
-export { instance as axios, authInstance as auth };
+const postsInstance = axios.create({
+  baseURL: "http://localhost:8002/api/v1/posts",
+});
+
+export {
+  instance as axios,
+  authInstance as auth,
+  postsInstance as postsService,
+};
