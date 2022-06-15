@@ -15,3 +15,4 @@ export * from "./comments-icon";
 export * from "./close-icon";
 export * from "./add-photo";
 export * from "./add-video";
+export * from "./settings-icon";
