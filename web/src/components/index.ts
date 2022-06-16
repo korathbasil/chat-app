@@ -10,3 +10,4 @@ export * from "./search-input/search-input";
 export * from "./main-nav/main-nav";
 export * from "./custom-header/custom-header";
 export * from "./profile-intro/profile-intro";
+export * from "./avatar/avatar";

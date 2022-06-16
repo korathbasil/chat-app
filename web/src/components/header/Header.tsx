@@ -5,6 +5,7 @@ import { user } from "../../data-store/user";
 
 import styles from "./header.module.scss";
 import { Search, Profile } from "../../assets/icons";
+import { Avatar } from "../../components/avatar/avatar";
 
 export const Header: Component = () => {
   return (
@@ -14,11 +15,10 @@ export const Header: Component = () => {
         <NavLink href="/search">
           <Search />
         </NavLink>
-
         {user()?.profilePicture ? (
-          <img src={user()?.profilePicture} />
+          <Avatar image={user()?.profilePicture} />
         ) : (
-          <Profile />
+          <Avatar />
         )}
       </div>
     </header>
