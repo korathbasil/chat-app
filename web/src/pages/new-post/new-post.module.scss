@@ -1,0 +1,60 @@
+.newPost {
+    margin-top: 65px;
+    padding: 0 20px;
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    form {
+        textarea {
+            width: 100%;
+            resize: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid lightgrey;
+            outline: none;
+        }
+
+        .media {
+            margin-top: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+            img {
+                width: 100px;
+                height: 100px;
+                object-fit: contain;
+                border-radius: 10px;
+            }
+        }
+
+        .actions {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+
+            .addImage, .addVideo {
+                display: flex;
+                justify-content: center;
+                flex: 1;
+                display: flex;
+                align-items: center;
+                background-color: lightgray;
+                padding: 10px;
+                border-radius: 10px;
+
+                p {
+                    margin-left: 10px;
+                }
+            }
+
+            .addImage:nth-child(1) {
+                margin-right: 10px;
+            }
+        }
+    }
+    
+}
