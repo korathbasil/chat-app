@@ -17,3 +17,4 @@ export * from "./add-photo";
 export * from "./add-video";
 export * from "./settings-icon";
 export * from "./bell-icon";
+export * from "./add-icon";
