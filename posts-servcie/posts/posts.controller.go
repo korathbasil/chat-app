@@ -1,13 +1,24 @@
 package posts
 
 import (
+	"io/ioutil"
+
 	"github.com/gofiber/fiber/v2"
 
 	"github.com/korathbasil/chat-app/posts-service/utils"
 )
 
 func InitializeRoutes(router fiber.Router) {
+	router.Get("/", getPosts)
 	router.Post("/", createPost)
+	router.Get("/files/images/:filename", getImage)
+	router.Get("/files/videos/:filename", getVideo)
+}
+
+func getPosts(c *fiber.Ctx) error {
+	posts := GetAllPosts()
+
+	return c.JSON(posts)
 }
 
 func createPost(c *fiber.Ctx) error {
@@ -69,4 +80,28 @@ func createPost(c *fiber.Ctx) error {
 
 	// return c.JSON(result)
 	return c.JSON(result)
+}
+
+func getImage(c *fiber.Ctx) error {
+	filename := c.Params("filename")
+
+	dat, err := ioutil.ReadFile("./files/images/" + filename)
+	if err != nil {
+		return err
+	}
+
+	c.Set("Content-Type", "image/jpeg")
+	return c.Send(dat)
+}
+
+func getVideo(c *fiber.Ctx) error {
+	filename := c.Params("filename")
+
+	dat, err := ioutil.ReadFile("./files/videos/" + filename)
+	if err != nil {
+		return err
+	}
+
+	c.Set("Content-Type", "video/mp4")
+	return c.Send(dat)
 }

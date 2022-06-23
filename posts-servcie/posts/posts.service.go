@@ -1,6 +1,14 @@
 package posts
 
-import "go.mongodb.org/mongo-driver/mongo"
+import (
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
+)
+
+func GetAllPosts() []primitive.M {
+	posts := FindAllPosts()
+	return posts
+}
 
 func CreatePost(post CraetePostDto, imageFiles []string, videoFiles []string) (*mongo.InsertOneResult, error) {
 	var media []Media
