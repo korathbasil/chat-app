@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: users
-          image: korathbasil/ngage-plus/users:0.0.1
+          image: korathbasil/ngage-plus/users
 
 ---
 apiVersion: v1
@@ -27,5 +27,5 @@ spec:
   ports:
     - name: users
       protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 8001
+      targetPort: 3001
