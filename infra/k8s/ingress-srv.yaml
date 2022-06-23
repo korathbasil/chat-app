@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    kubernates.io/ingress.class: nginx
+    nginx.ingress.kubernates.io/use-regex: "true"
+spec:
+  rules:
+    - host: ngage.plus
+      http:
+        paths:
+          - path: /api/users/?(.*)
+            backend:
+              serviceName: users-srv
+              servicePort: 8001
